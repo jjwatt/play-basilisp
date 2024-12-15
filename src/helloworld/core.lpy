@@ -1,0 +1,9 @@
+(import datetime)
+(import os)
+(def now (datetime.datetime/now))
+(println "Hello world!")
+(def coreexists (os.path/exists "src/helloworld/core.lpy"))
+(println "coreexists:" coreexists)
+(println (. now strftime "%Y-%m-%d"))
+(println (.strftime now "%Y-%m-%d"))
+
