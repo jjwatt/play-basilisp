@@ -1,0 +1,13 @@
+(defn norm [value low high]
+  "Normalize value to between 0.0 and 1.0."
+  (/ (- value low) (- high low)))
+(defn lerp [low high amt]
+  "Linear interpolation of amt to the range [low, high].
+   Extrapolates if amt is outside the range [0.0, 1.0]."
+  (+ low (* amt (- high low))))
+(defn mapvalue [value low1 high1 low2 high2]
+  "Map from one set of values to the other."
+  (let [n (norm value low1 high1)
+        c (lerp low2 high2 n)] c))
+;; (println (norm 10 1 100))
+;; (println (mapvalue 10 1 10 1 100))

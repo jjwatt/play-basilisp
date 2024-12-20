@@ -1,0 +1,35 @@
+(import pyxel)
+(import random)
+(def width 500)
+(def height 100)
+(defn draw-chunked-line [width step]
+  (let [lastx -999
+        lasty -999
+        y 50
+        border 20]
+    (loop [x border
+           lastx lastx
+           lasty lasty]
+      (when (> lastx -999)
+        (pyxel/line x y lastx lasty 11))
+      (if (<= x (- width border))
+        (recur (+ x step) x y)))))
+(defn draw-chunked-line-vary-y [width step]
+  (let [borderx 20
+        bordery 10]
+    (loop [x borderx
+           y 50
+           lastx -999
+           lasty -999]
+      (when (> lastx -999)
+        (pyxel/line x y lastx lasty 11))
+      (if (<= x (- width borderx))
+        (recur (+ x step)
+               (+ bordery
+                  (random/uniform 0 (- height (* 2 bordery))))
+               x y)))))
+(pyxel/init width height)
+(pyxel/cls 5)
+(draw-chunked-line-vary-y width 5)
+(pyxel/show)
+

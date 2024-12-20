@@ -1,0 +1,21 @@
+(import pyxel)
+(defn draw-recursive-circles [x y radius color]
+  (when (> radius 8)
+    (pyxel/ellib x y radius radius color)
+    (draw-recursive-circles (+ x radius) y (/ radius 2) color)
+    (draw-recursive-circles (- x radius) y (/ radius 2) color)
+    (draw-recursive-circles x (+ y radius) (/ radius 2) color)
+    (draw-recursive-circles x (- y radius) (/ radius 2) color)))
+(defn draw-recursive-circles2 [x y radius color]
+  (when (> radius 8)
+    (pyxel/ellib x y radius radius color)
+    (let [next-radius (/ radius 2)]
+      (draw-recursive-circles2 (+ x (* 2 radius)) y next-radius color)
+      (draw-recursive-circles2 (- x (* 2 radius)) y next-radius color)
+      (draw-recursive-circles2 x (+ y (* 2 radius)) next-radius color)
+      (draw-recursive-circles2 x (- y (* 2 radius)) next-radius color))))
+(pyxel/init 400 400)
+(pyxel/cls 1)
+(draw-recursive-circles 200 200 100 8)
+(pyxel/show)
+
